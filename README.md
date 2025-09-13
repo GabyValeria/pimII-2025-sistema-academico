@@ -6,11 +6,11 @@ Este projeto tem como objetivo desenvolver um **sistema acadêmico colaborativo*
 ---
 
 ## 👥 Equipe
-- Nome 1 – RA – Função
-- Nome 2 – RA – Função
-- Nome 3 – RA – Função
-- Nome 4 – RA – Função
-- Nome 5 – RA – Função
-- Nome 6 – RA – Função
+- Gabrielle Valéria – R869DD5 – Product Owner (PO)
+- Gabriel Sousa – R869067 – Scrum Master (SM)
+- Arthur Ferreira – R661881 – Desenvolvedor
+- Felipe Faria – H719BH9 – Desenvolvedor
+- Santiago Pacheco – R8681C9 – Desenvolvedor
+- Vinícius Machado – R870HA8 – Desenvolvedor
   
 ---

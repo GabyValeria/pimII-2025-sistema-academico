@@ -18,7 +18,7 @@ O projeto consiste na criação de uma plataforma robusta para ambiente de rede 
 
 ## 🚀 **Funcionalidades**
 
-O sistema foi projetado para atender às seguintes necessidades, conforme a [Especificação de Requisitos de Software (SRS)](./SRS%20-%20PIMII.pdf):
+O sistema foi projetado para atender às seguintes necessidades, conforme a [Especificação de Requisitos de Software (SRS)](./Docs/SRS%20-%20PIMII.pdf):
 
 | Categoria | Funcionalidade |
 | :--- | :--- |

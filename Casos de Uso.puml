@@ -1,0 +1,69 @@
+@startuml DiagramaDeCasoDeUso_Organizado
+
+title Diagrama de Caso de Uso - Sistema Acadêmico
+
+' ========= DEFINIÇÃO DOS ATORES =========
+' Atores "humanos" à esquerda
+actor Admin
+actor Professor
+actor Aluno
+
+' Ator "sistema" à direita
+actor "Serviço de IA" as ServicoIA
+
+' ========= ESTRUTURA DO SISTEMA =========
+rectangle "Sistema" {
+  ' Casos de Uso (agrupados por ator principal para melhor leitura)
+  
+  ' --- Casos de Uso do Admin ---
+  usecase "Gerenciar Alunos" as UC1
+  usecase "Gerenciar Turmas" as UC2
+  
+  ' --- Casos de Uso do Professor ---
+  usecase "Publicar Atividades / Upload" as UC3
+  usecase "Corrigir / Lançar Notas" as UC4
+  usecase "Registrar Aula / Diário" as UC9
+  
+  ' --- Casos de Uso do Aluno ---
+  usecase "Entregar Atividade" as UC10
+
+  ' --- Casos de Uso Compartilhados ---
+  usecase "Logar / Autenticar" as UC5
+  usecase "Enviar Mensagens" as UC6
+  usecase "Buscar / Consultar com IA" as UC7
+  usecase "Gerar Relatório Acadêmico (PDF)" as UC8
+  
+  ' ========= CONEXÕES (Com Dicas de Direção) =========
+  ' Conexões dos atores da esquerda para a direita ( -r- )
+  Admin -r- UC1
+  Admin -r- UC2
+  
+  Professor -r- UC2
+  Professor -r- UC3
+  Professor -r- UC4
+  Professor -r- UC6
+  Professor -r- UC8
+  Professor -r- UC9
+  
+  Aluno -r- UC6
+  Aluno -r- UC8
+  Aluno -r- UC10
+  
+  ' Conexões para o caso de uso "Logar" vindo de baixo ( -u- )
+  Admin -u- UC5
+  Professor -u- UC5
+  Aluno -u- UC5
+
+  ' Conexão do ator da direita para a esquerda ( -l- )
+  UC7 -l- ServicoIA
+  Professor -r- UC7
+  Aluno -r- UC7
+
+  ' Relacionamentos entre Casos de Uso (com setas direcionais)
+  UC4 ..> UC5 : "<<consultar>>"
+  UC8 .up.> UC7 : "<<include>>"
+  UC9 .up.> UC8 : "<<extend>>"
+  UC10 ..> UC9 : "<<include>>"
+}
+
+@enduml

@@ -57,4 +57,5 @@ graph TD
     L -- "3. Lê de" --> K_in
     L -- "4. Escreve em" --> K_out
     H -- "5. Lê de" --> K_out
+
 ```

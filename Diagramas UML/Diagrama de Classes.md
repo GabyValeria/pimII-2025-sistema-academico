@@ -100,4 +100,5 @@ classDiagram
     
     Aluno "1" -- "*" Matricula
     Turma "1" -- "*" Matricula
+
 ```

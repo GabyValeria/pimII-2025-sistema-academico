@@ -1,4 +1,7 @@
 ```mermaid
+---
+title: Diagrama de Classes - Sistema Acadêmico
+---
 classDiagram
     direction LR
 
@@ -102,3 +105,4 @@ classDiagram
     Turma "1" -- "*" Matricula
 
 ```
+

@@ -1,0 +1,21 @@
+id;usuario;senha;papel;nome
+1;admin;admin;0;Administrador do Sistema
+2;prof.silva;senha123;1;Prof. João Silva
+3;prof.ana;senha456;1;Profa. Ana Costa
+4;prof.mendes;senha789;1;Prof. Carlos Mendes
+5;prof.lima;senha101;1;Profa. Beatriz Lima
+6;H74IAI3;aluno1;2;Renata Victória Batista de Faria
+7;R714195;aluno2;2;Enzo Gabriel de Castro Oliveira
+8;H7460C0;aluno3;2;Pedro Bueno da Silva
+9;F361551;aluno4;2;Jhonatan Henrique de Oliveira Rosa
+10;F35CBG6;aluno5;2;Nickolas Roberto Pereira Goulart Barreto
+11;F5123A1;aluno6;2;Mariana Costa Ribeiro
+12;F5124B2;aluno7;2;Lucas Ferreira Alves
+13;F5125C3;aluno8;2;Guilherme Martins Souza
+14;F5126D4;aluno9;2;Isabela Gomes Pereira
+15;F5127E5;aluno10;2;Rafael Oliveira Andrade
+16;F5128F6;aluno11;2;Juliana Santos Correia
+17;F5129G7;aluno12;2;Fernando Almeida Rocha
+18;F5130H8;aluno13;2;Camila Barbosa Lima
+19;F5131I9;aluno14;2;Diego Azevedo Castro
+20;F5132J0;aluno15;2;Larissa Monteiro Azevedo

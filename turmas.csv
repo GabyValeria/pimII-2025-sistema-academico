@@ -1,0 +1,21 @@
+id;nome;id_professor
+1;Programação em C - Turma A (Manhã);2
+2;Programação em C - Turma B (Noite);2
+3;Estrutura de Dados em Python - Turma A (Manhã);3
+4;Estrutura de Dados em Python - Turma B (Noite);3
+5;Engenharia de Software Ágil - Turma Única;2
+6;Análise e Projeto de Sistemas - Turma A (Manhã);3
+7;Análise e Projeto de Sistemas - Turma B (Noite);5
+8;Redes de Computadores - Turma A (Manhã);4
+9;Redes de Computadores - Turma B (Noite);4
+10;Inteligência Artificial - Turma Única;5
+11;Sistemas Distribuídos - Turma A (Tarde);4
+12;Educação Ambiental e TI - Turma Única;5
+13;Pesquisa, Tecnologia e Inovação - Turma A;3
+14;Projeto de Sistemas I - Turma A (Manhã);2
+15;Projeto de Sistemas I - Turma B (Noite);2
+16;Banco de Dados - Turma A (Manhã);4
+17;Banco de Dados - Turma B (Noite);4
+18;Segurança da Informação - Turma Única;5
+19;Desenvolvimento Web Frontend - Turma A;3
+20;Desenvolvimento Web Backend - Turma B;3

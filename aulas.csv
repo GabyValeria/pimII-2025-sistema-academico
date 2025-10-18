@@ -1,0 +1,21 @@
+id;id_turma;data;topico
+1;1;10/03/2025;Introdução à Lógica e Variáveis em C
+2;1;17/03/2025;Estruturas de Decisão e Seleção
+3;2;10/03/2025;Revisão de Lógica e Variáveis em C
+4;2;17/03/2025;Ponteiros e Alocação de Memória
+5;3;12/03/2025;Variáveis, Listas e Tuplas em Python
+6;3;19/03/2025;Dicionários e Laços de Repetição
+7;4;12/03/2025;Conceitos Avançados de Listas
+8;4;19/03/2025;Funções e Módulos em Python
+9;5;15/03/2025;Princípios do Manifesto Ágil e Scrum
+10;5;22/03/2025;Planeamento de Sprints e User Stories
+11;6;11/04/2025;Introdução à UML e Requisitos
+12;6;18/04/2025;Diagramas de Caso de Uso
+13;7;11/04/2025;Requisitos Funcionais e Não Funcionais
+14;7;18/04/2025;Diagramas de Sequência
+15;8;13/04/2025;Modelo OSI e Camada Física
+16;8;20/04/2025;Endereçamento IPv4 e Máscaras
+17;9;13/04/2025;Protocolos TCP vs UDP
+18;9;20/04/2025;Configuração de Roteadores
+19;10;05/05/2025;Fundamentos de Machine Learning
+20;10;12/05/2025;Tipos de Algoritmos (Supervisionado)

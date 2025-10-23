@@ -1,56 +1,69 @@
-```mermaid
----
-title: Diagrama de Caso de Uso - Sistema Acadêmico
----
-graph LR
-    %% Definição dos Atores
-    Admin
-    Professor
-    Aluno
-    ServicoIA[Serviço de IA]
+@startuml
+title Diagrama de Casos de Uso - Sistema Acadêmico com IA
 
-    %% Bloco que representa o Sistema
-    subgraph Sistema
-        direction LR
-        %% Definição dos Casos de Uso com IDs
-        UC1("Gerenciar Alunas")
-        UC2("Gerenciar Turmas")
-        UC3("Publicar Atividades / Upload")
-        UC4("Corrigir / Lançar Notas")
-        UC5("Logar / Autenticar")
-        UC6("Enviar Mensagens")
-        UC7("Buscar / Consultar com IA")
-        UC8("Gerar Relatório Acadêmico (PDF)")
-        UC9("Registrar Aula / Diário")
-        UC10("Entregar Atividade")
-    end
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightBlue
+  BorderColor Black
+  ArrowColor Black
+}
+skinparam title {
+  FontSize 18
+  FontStyle bold
+  Alignment center
+}
 
-    %% Conexões dos Atores com os Casos de Uso
-    Admin --> UC1
-    Admin --> UC2
-    Admin --> UC5
+' ---- Atores ----
+actor "Professor" as prof
+actor "Admin" as admin
+actor "Aluno" as aluno
+actor "Serviço de IA" as ia
 
-    Professor --> UC2
-    Professor --> UC3
-    Professor --> UC4
-    Professor --> UC5
-    Professor --> UC6
-    Professor --> UC7
-    Professor --> UC8
-    Professor --> UC9
+' ---- Sistema ----
+rectangle "Sistema" {
+    usecase "Gerenciar Alunos" as UC1
+    usecase "Gerenciar Turmas" as UC2
+    usecase "Publicar Atividades / Upload" as UC3
+    usecase "Corrigir / Lançar Notas" as UC4
+    usecase "Logar / Autenticar" as UC5
+    usecase "Enviar Mensagens" as UC6
+    usecase "Buscar / Consultar com IA" as UC7
+    usecase "Gerar Relatório Acadêmico (PDF)" as UC8
+    usecase "Registrar Aula / Diário" as UC9
+    usecase "Entregar Atividade" as UC10
+}
 
-    Aluno --> UC5
-    Aluno --> UC6
-    Aluno --> UC7
-    Aluno --> UC8
-    Aluno --> UC10
+' ---- Ligações dos atores ----
+prof --> UC1
+prof --> UC2
+prof --> UC3
+prof --> UC4
+prof --> UC5
+prof --> UC6
+prof --> UC7
+prof --> UC8
+prof --> UC9
+prof --> UC10
 
-    %% Conexão com o Serviço Externo
-    UC7 --> ServicoIA
+admin --> UC1
+admin --> UC2
+admin --> UC3
+admin --> UC5
 
-    %% Relacionamentos entre Casos de Uso
-    UC4 -.->|"<<consultar>>"| UC5
-    UC8 -.->|"<<include>>"| UC7
-    UC9 -.->|"<<extend>>"| UC8
-    UC10 -.->|"<<include>>"| UC9
-```
+aluno --> UC5
+aluno --> UC6
+aluno --> UC7
+aluno --> UC10
+
+ia --> UC7
+
+' ---- Relações include/extend ----
+UC9 .> UC10 : <<include>>
+UC8 .> UC9 : <<extends>>
+UC7 .> UC8 : <<include>>
+UC5 .> UC7 : <<consultar>>
+UC4 .> UC5 : <<include>>
+
+@enduml

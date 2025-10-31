@@ -1038,4 +1038,5 @@ void menu_aluno(int id_aluno) {
             default: printf("Opcao invalida.\n");
         }
     } while (opcao != 0);
+
 }

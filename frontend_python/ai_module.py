@@ -2,7 +2,7 @@ import os
 from google import genai
 from google.genai.errors import APIError
 
-API_KEY = "AIzaSyDdQK7-y357LGV-qTNnC6YpbrNSl54oVys"
+API_KEY = "CHAVE_API"
 
 if not API_KEY:
     CLIENTE_GEMINI = None 
@@ -90,3 +90,4 @@ def _relatorio_mock(nome_usuario: str, tipo_usuario: str, dados_para_ia: str) ->
         f"{resumo}\n\n"
         f"Para mais detalhes, verifique os logs de carregamento do ai_module.py."
     )
+

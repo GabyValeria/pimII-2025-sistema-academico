@@ -1,23 +1,42 @@
 @echo off
-ECHO Compilando o backend em C...
+set COMPILADOR=gcc
+set ARQUIVOS=main.c dados.c
+set EXECUTAVEL=sistema_academico.exe
+set OPCOES_GCC=-Wall -std=c99
 
-REM Navega para a pasta do backend
-cd backend_c
+echo.
+echo --- INICIANDO COMPILACAO ---
+echo Compilador: %COMPILADOR%
+echo Arquivos: %ARQUIVOS%
+echo Saida: %EXECUTAVEL%
+echo Opcoes: %OPCOES_GCC%
+echo.
 
-REM Comando de compilação usando GCC
-REM Junta os arquivos .c e cria o executável 'sistema_academico.exe'
-gcc main.c funcoes.c -o sistema_academico.exe -Wall -Wextra
+%COMPILADOR% %ARQUIVOS% %OPCOES_GCC% -o %EXECUTAVEL%
 
-REM Verifica se a compilação foi bem-sucedida
-if %errorlevel% == 0 (
-    ECHO.
-    ECHO Compilacao concluida com sucesso!
-    ECHO O executavel "sistema_academico.exe" foi criado dentro da pasta 'backend_c'.
+REM Verifica o código de erro retornado pelo GCC
+if ERRORLEVEL 1 (
+    echo.
+    echo ❌ ERRO DE COMPILACAO! Verifique as mensagens acima.
 ) else (
-    ECHO.
-    ECHO ERRO: A compilacao falhou.
-    ECHO Verifique se o GCC (MinGW) esta instalado e configurado no PATH do sistema.
+    echo.
+    echo ✅ COMPILACAO CONCLUIDA! Executavel criado: %EXECUTAVEL%
+    echo.
+    REM Oferece a opcao de executar o programa
+    :RUN_PROMPT
+    set /p RUN_CHOICE="Deseja executar o sistema agora? (S/N): "
+    if /i "%RUN_CHOICE%"=="S" (
+        echo.
+        echo --- EXECUTANDO O SISTEMA ---
+        %EXECUTAVEL%
+    ) else if /i "%RUN_CHOICE%"=="N" (
+        echo Nao executando.
+    ) else (
+        echo Opcao invalida. Digite S ou N.
+        goto RUN_PROMPT
+    )
 )
 
-ECHO.
-pause
+echo.
+echo Pressione qualquer tecla para sair...
+pause > nul

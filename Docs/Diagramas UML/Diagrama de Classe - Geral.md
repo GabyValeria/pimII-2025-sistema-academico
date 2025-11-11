@@ -115,4 +115,5 @@ classDiagram
     Admin --> ServicoDeIA : Aciona
     Aluno --> ServicoDeIA : Aciona
     Relatorio "1" -- "1" ServicoDeIA : Processa
+
 ```

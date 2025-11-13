@@ -333,7 +333,7 @@ void main_menu() {
 
     do {
         printf("\n===================================\n");
-        printf("--- SISTEMA DE GESTÃO ACADÊMICA ---\n");
+        printf("--- SISTEMA DE GESTAO ACADEMICA ---\n");
         printf("===================================\n");
         printf("1. Login\n");
         printf("0. Sair\n");
@@ -377,5 +377,4 @@ int main() {
     main_menu();
     liberar_memoria();
     return 0;
-
 }

@@ -56,6 +56,7 @@ Além disso, promove **sustentabilidade digital**, substituindo relatórios impr
 │ ├── app_gui.py<br/>
 │ ├── data_manager.py<br/>
 │ ├── ai_module.py<br/>
+│ └── requirements.txt<br/>
 │<br/>
 ├── 📄 Manual_Uso.pdf<br/>
 ├── 📄 README.md<br/>

@@ -88,17 +88,6 @@ Além disso, promove **sustentabilidade digital**, substituindo relatórios impr
 
 ---
 
-## 🧮 Requisitos do Sistema
-
-| Tipo | Descrição |
-|------|------------|
-| Sistema Operacional | Windows 10 ou superior |
-| Memória RAM | Mínimo de 4 GB |
-| Linguagens | C e Python 3.12+ |
-| Dependências | Tkinter, Pandas, Requests (para IA Gemini) |
-
----
-
 ## 🧠 Inteligência Artificial
 
 O sistema conta com **duas abordagens de IA**:

@@ -1,6 +1,7 @@
-8525440,°‚,emico.exe,,,
+ID,Nome,RA,CPF,Login,Senha
+1,Barbara Paiva,SD4R55,123.321.231.21,babi.aluna,6789
 2,Ana Carvalho,S2D3RR4,222.333.444-55,anaaluna,6789
-3,JoÃ£o Silva,J3A4TT5,333.444.555-66,joao.silva,6789
+3,João Silva,J3A4TT5,333.444.555-66,joao.silva,6789
 4,Maria Oliveira,M4B5UU6,444.555.666-77,maria.oliveira,6789
 5,Pedro Santos,P5C6VV7,555.666.777-88,pedro.santos,6789
 6,Camila Costa,C6D7WW8,666.777.888-99,camila.costa,6789
@@ -17,14 +18,14 @@
 17,Felipe Barbosa,F7O8HH9,777.888.999-00,felipe.barbosa,6789
 18,Manuela Castro,M8P9II0,888.999.000-11,manuela.castro,6789
 19,Bruno Pinto,B9Q0JJ1,999.000.111-22,bruno.pinto,6789
-20,HeloÃ­sa Mendes,H0R1KK2,000.111.222-33,heloisa.mendes,6789
+20,Heloísa Mendes,H0R1KK2,000.111.222-33,heloisa.mendes,6789
 21,Enzo Ferreira,E1S2LL3,111.222.333-44,enzo.ferreira,6789
 22,Laura Dias,L2T3MM4,222.333.444-55,laura.dias,6789
 23,Guilherme Nunes,G3U4NN5,333.444.555-66,guilherme.nunes,6789
 24,Giovanna Melo,G4V5OO6,444.555.666-77,giovanna.melo,6789
 25,Thiago Silveira,T5W6PP7,555.666.777-88,thiago.silveira,6789
-26,CecÃ­lia Pires,C6X7QQ8,666.777.888-99,cecilia.pires,6789
-27,BenÃ­cio Freitas,B7Y8RR9,777.888.999-00,benicio.freitas,6789
+26,Cecília Pires,C6X7QQ8,666.777.888-99,cecilia.pires,6789
+27,Benício Freitas,B7Y8RR9,777.888.999-00,benicio.freitas,6789
 28,Clara Duarte,C8Z9SS0,888.999.000-11,clara.duarte,6789
 29,Davi Costa,D9A0TT1,999.000.111-22,davi.costa,6789
 30,Luiza Gomes,L0B1UU2,000.111.222-33,luiza.gomes,6789

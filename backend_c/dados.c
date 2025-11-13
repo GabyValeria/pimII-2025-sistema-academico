@@ -543,7 +543,7 @@ void visualizar_matriculas_aluno(int id_aluno) {
     Aluno *a = buscar_aluno_por_id(id_aluno);
     if (!a) return;
 
-    printf("\n--- MATRÍCULAS DE %s ---\n", a->nome);
+    printf("\n--- MATRICULAS DE %s ---\n", a->nome);
     printf("Codigo | Nome da Turma | Professor Responsavel\n");
     printf("---|---|---\n");
     int count = 0;

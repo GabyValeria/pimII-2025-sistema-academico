@@ -149,7 +149,7 @@ O sistema conta com **duas abordagens de IA**:
 
 ## 📎 Referências
 
-As principais referências bibliográficas estão disponíveis no documento **PIMII.pdf** (seção 5 – Referências).  
+As principais referências bibliográficas estão disponíveis no documento **Documentação_PIMII.pdf** (seção 5 – Referências).  
 Entre elas: *Pressman & Maxim (2021)*, *Sommerville (2019)*, *Russell & Norvig (2021)*, *Schwaber & Sutherland (2020)* e *Goodfellow et al. (2016)*.
 
 ---

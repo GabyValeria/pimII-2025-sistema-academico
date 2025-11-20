@@ -154,12 +154,6 @@ Entre elas: *Pressman & Maxim (2021)*, *Sommerville (2019)*, *Russell & Norvig (
 
 ---
 
-## 🌐 Repositório Oficial
-
-🔗 **GitHub:** [https://github.com/GabyValeria/pimII-2025-sistema-academico](https://github.com/GabyValeria/pimII-2025-sistema-academico)
-
----
-
 <p align="center">
   <i>Desenvolvido com dedicação por alunos da UNIP – ADS 2025 💙</i>
 </p>

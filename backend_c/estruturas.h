@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h> 
-#include <errno.h> // Para a verificação de erro EEXIST
+#include <errno.h> 
+#include <stddef.h> // Para size_t
 
 // --- Headers condicionais para gerenciamento de diretórios ---
 #ifdef _WIN32
@@ -32,7 +33,7 @@
 #define MAX_CPF 15
 #define MAX_CODIGO 20
 #define MAX_SEMESTRE 10
-#define MAX_DESCRICAO_ATIVIDADE 150
+#define MAX_NOME_ATIVIDADE 100
 #define MAX_DATA 11 
 #define CHAVE_CRIPTOGRAFIA 5
 
@@ -76,8 +77,8 @@ typedef struct {
 } Turma;
 
 typedef struct {
-    int id;
-    char descricao[MAX_DESCRICAO_ATIVIDADE];
+    int id; 
+    char nome_atividade[MAX_NOME_ATIVIDADE]; 
     int id_turma;
     float peso;
     char data_entrega[MAX_DATA];
@@ -193,4 +194,4 @@ void menu_aluno(int id_aluno);
 void main_menu();
 
 
-#endif 
+#endif

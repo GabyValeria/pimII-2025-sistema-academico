@@ -412,7 +412,7 @@ void listar_atividades_turma(int id_turma) {
     for (int i = 0; i < num_atividades; i++) {
         if (atividades[i].id_turma == id_turma) {
             printf("%d | %s | %.0f%% | %s\n", 
-                atividades[i].id, atividades[i].descricao, atividades[i].peso * 100, atividades[i].data_entrega);
+                atividades[i].id, atividades[i].nome_atividade, atividades[i].peso * 100, atividades[i].data_entrega);
             count++;
         }
     }
@@ -439,24 +439,37 @@ void cadastrar_atividade(int id_professor) {
     nova_ativ->id = obter_proximo_id("atividades.csv", sizeof(Atividade));
     nova_ativ->id_turma = id_turma;
 
-    printf("Descricao (Max 150): "); scanf(" %149[^\n]", nova_ativ->descricao); limpa_buffer();
-    
-    float peso_input;
-    printf("Peso (em %% - Ex: 40 para 40%%): ");
-    if (scanf("%f", &peso_input) != 1 || peso_input < 0 || peso_input > 100) { 
-        limpa_buffer(); 
-        printf("Peso invalido. Atividade nao cadastrada.\n");
-        num_atividades--;
-        return;
-    }
-    nova_ativ->peso = peso_input / 100.0f;
-    limpa_buffer();
+    // 🚨 CORREÇÃO DE ERRO PRINCIPAL E RENOVAÇÃO DO CAMPO
 
-    printf("Data de Entrega (DD/MM/AAAA): "); scanf(" %10s", nova_ativ->data_entrega); limpa_buffer();
+    // 1. Limpa o buffer de entrada de qualquer '\n' anterior (essencial!)
+    limpa_buffer(); 
+
+    printf("Nome da Atividade (Max %d, NAO use VIRGULAS): ", MAX_NOME_ATIVIDADE - 1); 
+    
+    // 2. Usa fgets, lendo no máximo MAX_NOME_ATIVIDADE - 1 caracteres (+ \0)
+    if (fgets(nova_ativ->nome_atividade, MAX_NOME_ATIVIDADE, stdin) == NULL){
+        printf("Erro ao ler nome da atividade. Abortando...\n");
+        num_atividades--; 
+        return; 
+    }
+    
+    // 3. Remove a quebra de linha ('\n') que o fgets inclui.
+    size_t len = strlen(nova_ativ->nome_atividade);
+    if (len > 0 && nova_ativ->nome_atividade[len - 1] == '\n') {
+        nova_ativ->nome_atividade[len - 1] = '\0';
+    } else {
+        // 4. Se não achou '\n', a entrada excedeu o buffer: limpa o resto da linha
+        limpa_buffer();
+    }
+    
+    printf("Data de Entrega (DD/MM/AAAA): "); 
+    // Usar %s com limite de tamanho é mais seguro que %10s, mas assumindo MAX_DATA = 11:
+    scanf(" %10s", nova_ativ->data_entrega); 
+    limpa_buffer();
 
     // O main.c cuida de salvar em dados/atividades.csv
     if (salvar_dados_csv("atividades.csv", atividades, num_atividades, sizeof(Atividade), ACESSO_PROFESSOR)) {
-        printf("✅ Atividade '%s' cadastrada na Turma %s.\n", nova_ativ->descricao, t->codigo);
+        printf("✅ Atividade '%s' cadastrada com sucesso.\n", nova_ativ->nome_atividade);
     } else {
         printf("❌ Erro ao salvar atividade.\n");
     }
@@ -588,7 +601,7 @@ void visualizar_notas_aluno(int id_aluno) {
 
             printf("%d | %s | %s | %.2f\n", 
                 notas[i].id_atividade, 
-                ativ ? ativ->descricao : "Descricao Desconhecida", 
+                ativ ? ativ->nome_atividade : "Atividade Desconhecida", 
                 t ? t->codigo : "N/A",
                 notas[i].nota);
             count++;
@@ -690,7 +703,7 @@ void menu_admin(int id_admin) {
         printf("1. Gerenciar Alunos (CRUD)\n");
         printf("2. Gerenciar Professores (CRUD)\n");
         printf("3. Gerenciar Turmas/Matriculas\n");
-        printf("0. Logout\n");
+        printf("0. Sair\n");
         printf("Opcao: ");
 
         if (scanf("%d", &opcao) != 1) { limpa_buffer(); opcao = -1; }
@@ -716,7 +729,7 @@ void menu_professor(int id_professor) {
         printf("1. Lancar Nota\n");
         printf("2. Cadastrar Atividade\n");
         printf("3. Listar Minhas Turmas\n");
-        printf("0. Logout\n");
+        printf("0. Sair\n");
         printf("Opcao: ");
 
         if (scanf("%d", &opcao) != 1) { limpa_buffer(); opcao = -1; }
@@ -741,7 +754,7 @@ void menu_aluno(int id_aluno) {
         printf("\n--- MENU ALUNO: %s ---\n", a->nome);
         printf("1. Visualizar Matriculas\n");
         printf("2. Visualizar Notas\n");
-        printf("0. Logout\n");
+        printf("0. Sair\n");
         printf("Opcao: ");
 
         if (scanf("%d", &opcao) != 1) { limpa_buffer(); opcao = -1; }

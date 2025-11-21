@@ -58,6 +58,17 @@ void descriptografar_string(char *str) {
     }
 }
 
+void formatar_float_ponto(float valor, char *buffer, size_t tamanho) {
+    // Usar snprintf para garantir o ponto decimal e segurança de buffer
+    snprintf(buffer, tamanho, "%.2f", valor); 
+    // Garante que se a biblioteca C usar vírgula, ela seja trocada por ponto
+    for (size_t i = 0; i < tamanho; i++) {
+        if (buffer[i] == ',') {
+            buffer[i] = '.';
+        }
+    }
+}
+
 // Obtém o próximo ID disponível 
 int obter_proximo_id(const char *nome_arquivo, size_t tamanho_struct) {
     if (strcmp(nome_arquivo, "alunos.csv") == 0) return num_alunos + 1;
@@ -99,13 +110,17 @@ int garantir_diretorio_dados() {
 // --- 3. FUNÇÕES DE PERSISTÊNCIA (CSV) ---
 // =================================================================
 
-// Salva o Administrador Master (Com caminho dados/)
+// Salva o Administrador Master (MODIFICADA para incluir cabeçalho)
 int salvar_admin_csv() {
     char caminho[TAMANHO_CAMINHO];
     snprintf(caminho, TAMANHO_CAMINHO, "%sadmin.csv", PASTA_DADOS);
     
     FILE *f = fopen(caminho, "w");
     if (!f) return 0;
+    
+    // --- ESCRITA DO CABEÇALHO PARA ADMIN ---
+    fprintf(f, "ID,NOME,LOGIN,SENHA\n");
+    // ----------------------------------------
     
     // A senha já está criptografada no struct admin_master
     fprintf(f, "%d,%s,%s,%s\n", 
@@ -115,7 +130,7 @@ int salvar_admin_csv() {
     return 1;
 }
 
-// Carrega o Administrador Master (Com caminho dados/)
+// Carrega o Administrador Master (MODIFICADA para pular o cabeçalho)
 int carregar_admin_csv() {
     char caminho[TAMANHO_CAMINHO];
     snprintf(caminho, TAMANHO_CAMINHO, "%sadmin.csv", PASTA_DADOS);
@@ -123,6 +138,13 @@ int carregar_admin_csv() {
     FILE *f = fopen(caminho, "r");
     if (!f) return 0;
 
+    char linha_cabecalho[512];
+    // Pula o cabeçalho
+    if (fgets(linha_cabecalho, sizeof(linha_cabecalho), f) == NULL) {
+        fclose(f);
+        return 0;
+    }
+    
     if (fscanf(f, "%d,%99[^,],%49[^,],%49[^\n]", 
         &admin_master.id, admin_master.nome, admin_master.login, admin_master.senha) == 4) {
         
@@ -134,7 +156,7 @@ int carregar_admin_csv() {
     return 0;
 }
 
-// Função de salvamento 
+// Função de salvamento (MODIFICADA para incluir cabeçalho)
 int salvar_dados_csv(const char *nome_arquivo, const void *dados, int num_registros, size_t tamanho_struct, int tipo_acesso) {
     char caminho[TAMANHO_CAMINHO];
     snprintf(caminho, TAMANHO_CAMINHO, "%s%s", PASTA_DADOS, nome_arquivo);
@@ -144,6 +166,22 @@ int salvar_dados_csv(const char *nome_arquivo, const void *dados, int num_regist
         printf("❌ Erro ao abrir arquivo %s para escrita. Verifique o diretorio.\n", caminho);
         return 0;
     }
+    
+    // --- ESCRITA DO CABEÇALHO ---
+    if (strcmp(nome_arquivo, "alunos.csv") == 0) {
+        fprintf(f, "ID,Nome,RA,CPF,Login,Senha\n");
+    } else if (strcmp(nome_arquivo, "professores.csv") == 0) {
+        fprintf(f, "ID,Nome,SIAPE,CPF,Login,Senha\n");
+    } else if (strcmp(nome_arquivo, "turmas.csv") == 0) {
+        fprintf(f, "ID,Nome,Codigo,Semestre,ID_Professor_Responsavel\n");
+    } else if (strcmp(nome_arquivo, "atividades.csv") == 0) {
+        fprintf(f, "ID,Nome_Atividade,ID_Turma,Peso,Data_Entrega\n");
+    } else if (strcmp(nome_arquivo, "matriculas.csv") == 0) {
+        fprintf(f, "ID_Aluno,ID_Turma\n");
+    } else if (strcmp(nome_arquivo, "notas.csv") == 0) {
+        fprintf(f, "ID_Atividade,ID_Aluno,Nota\n");
+    }
+    // ----------------------------
     
     for (int i = 0; i < num_registros; i++) {
         const void *registro = (const char *)dados + i * tamanho_struct;
@@ -160,7 +198,17 @@ int salvar_dados_csv(const char *nome_arquivo, const void *dados, int num_regist
              fprintf(f, "%d,%s,%s,%s,%d\n", t->id, t->nome, t->codigo, t->semestre, t->id_professor_responsavel);
         } else if (strcmp(nome_arquivo, "atividades.csv") == 0) {
             const Atividade *a = (const Atividade *)registro;
-            fprintf(f, "%d,%s,%d,%.2f,%s\n", a->id, a->descricao, a->id_turma, a->peso, a->data_entrega);
+            char peso_str[10]; 
+            
+            formatar_float_ponto(a->peso, peso_str, sizeof(peso_str)); 
+
+            fprintf(f, "%d,%s,%d,%s,%s\n",
+                a->id,
+                a->nome_atividade, 
+                a->id_turma,
+                peso_str,
+                a->data_entrega
+            );
         } else if (strcmp(nome_arquivo, "matriculas.csv") == 0) {
             const Matricula *m = (const Matricula *)registro;
             fprintf(f, "%d,%d\n", m->id_aluno, m->id_turma);
@@ -174,7 +222,7 @@ int salvar_dados_csv(const char *nome_arquivo, const void *dados, int num_regist
     return 1;
 }
 
-// Função auxiliar para carregar uma lista de structs 
+// Função auxiliar para carregar uma lista de structs (MODIFICADA para pular o cabeçalho)
 static int carregar_lista(const char *nome_arquivo, void **registros_ptr, int *num_registros_ptr, size_t tamanho_struct, int tipo) {
     char caminho[TAMANHO_CAMINHO];
     snprintf(caminho, TAMANHO_CAMINHO, "%s%s", PASTA_DADOS, nome_arquivo);
@@ -185,6 +233,14 @@ static int carregar_lista(const char *nome_arquivo, void **registros_ptr, int *n
     char linha[512];
     *num_registros_ptr = 0;
     *registros_ptr = NULL;
+    
+    // --- PULA O CABEÇALHO (A primeira linha) ---
+    if (fgets(linha, sizeof(linha), f) == NULL) {
+        // Se o arquivo estiver vazio (apenas o cabeçalho ou nada), fecha e retorna 0 registros.
+        fclose(f);
+        return 0;
+    }
+    // --------------------------------------------
 
     while (fgets(linha, sizeof(linha), f)) {
         void *novo_registro = alocar_novo_registro_generico(registros_ptr, num_registros_ptr, tamanho_struct);
@@ -210,10 +266,25 @@ static int carregar_lista(const char *nome_arquivo, void **registros_ptr, int *n
         // Atividade 
         else if (tipo == 5) { 
             Atividade *a = (Atividade *)novo_registro;
-            float peso_temp;
-            sscanf(linha, "%d,%149[^,],%d,%f,%10[^\n]", 
-                &a->id, a->descricao, &a->id_turma, &peso_temp, a->data_entrega);
-            a->peso = peso_temp;
+            char peso_str[10]; 
+            float peso_temp = 0.0; 
+
+            int campos_lidos = sscanf(linha, "%d,%99[^,],%d,%9[^,],%10[^\n]", 
+                &a->id, a->nome_atividade, &a->id_turma, peso_str, a->data_entrega);
+            
+            if (campos_lidos == 5) {
+                if (sscanf(peso_str, "%f", &peso_temp) == 1) {
+                    a->peso = peso_temp;
+                } else {
+                    printf("⚠️ ERRO: Falha ao converter PESO '%s' para float. Definido como 0.0. Linha: %s", peso_str, linha);
+                    a->peso = 0.0;
+                }
+
+            } else {
+                printf("❌ ERRO de formato no arquivo atividades.csv. Esperados 5 campos, lidos %d. Linha ignorada: %s", campos_lidos, linha);
+                (*num_registros_ptr)--;
+                free(novo_registro);
+            }
         }
         // Matricula
         else if (tipo == 6) { 
@@ -320,7 +391,6 @@ int fazer_login(int tipo_acesso_desejado, int *id_usuario_logado) {
 
     return ACESSO_NAO_AUTENTICADO;
 }
-
 
 // =================================================================
 // --- 5. FUNÇÃO PRINCIPAL DE MENU E EXECUÇÃO ---
